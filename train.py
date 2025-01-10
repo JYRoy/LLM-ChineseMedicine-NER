@@ -32,7 +32,7 @@ def token_map_with_cut(examples):
     """
     训练效果不好，会 cut 掉一些有用信息
     """
-    
+
     model_inputs = {
         "input_ids": [],
         "labels": [],
@@ -156,7 +156,7 @@ def compute_metrics(eval_preds):
     preds, labels = eval_preds
     preds = preds.cpu().numpy()
     labels = labels.cpu().numpy()
-     # 使用 tokenizer 对预测结果进行解码，忽略特殊标记
+    # 使用 tokenizer 对预测结果进行解码，忽略特殊标记
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     # 将标签中的 -100 替换为 151645
     labels = np.where(labels != -100, labels, 151645)
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     print(f"Trainable parameters: {train_param}")
     # 创建 Accelerator 对象，设置梯度累积步数为 8
     accelerator = Accelerator(gradient_accumulation_steps=8)
-    epochs = 2
+    epochs = 4
     # 创建 CosineAnnealingLR 学习率调度器，根据优化器、训练数据长度和 epoch 数等调整学习率
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer, len(train_data) * epochs / 8

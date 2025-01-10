@@ -73,6 +73,8 @@ if __name__ == "__main__":
     # 保存图像
     plt.savefig('input.png')
     
+    plt.close()
+    
     # 使用 Counter 统计相同元素的个数
     element_counts = Counter(label_length)
 
